@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Losowanie Liczb</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 5px 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            background: #f1f1f1;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        .reset-button {
+            background-color: #dc3545;
+        }
+        .reset-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Losowanie Liczb</h1>
+        <input type="number" id="minNumber" placeholder="Minimalna liczba" required>
+        <input type="number" id="maxNumber" placeholder="Maksymalna liczba" required>
+        <button onclick="drawNumber()">Losuj liczbę</button>
+        <button class="reset-button" onclick="resetNumbers()">Zresetuj liczby</button>
+
+        <h3>Wylosowane liczby:</h3>
+        <ul id="numberList"></ul>
+    </div>
+
+    <script>
+        const numberListElement = document.getElementById('numberList');
+
+        function drawNumber() {
+            const minNumber = parseInt(document.getElementById('minNumber').value);
+            const maxNumber = parseInt(document.getElementById('maxNumber').value);
+
+            if (!isNaN(minNumber) && !isNaN(maxNumber) && minNumber < maxNumber) {
+                const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+                addNumberToList(randomNumber);
+            } else {
+                alert('Proszę podać poprawny zakres liczb.');
+            }
+        }
+
+        function addNumberToList(number) {
+            const li = document.createElement('li');
+            li.textContent = `Wylosowana liczba: ${number}`;
+            numberListElement.appendChild(li);
+        }
+
+        function resetNumbers() {
+            numberListElement.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
